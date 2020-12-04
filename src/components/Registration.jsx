@@ -1,7 +1,5 @@
 import React from 'react';
 import '../assets/css/style.css';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-import Login from './Login';	
 
 function Registration() {
     return (

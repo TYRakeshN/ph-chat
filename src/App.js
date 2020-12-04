@@ -10,7 +10,9 @@ function App() {
      <Router>
     <div className="App">
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+      <img src={logo} alt="Profile Pic" className="rounded-img header-img" /> 
         <div className="container">
+         
           <Link className="navbar-brand" to={"/sign-in"}>PhChat</Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
