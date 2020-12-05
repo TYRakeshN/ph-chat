@@ -14,25 +14,20 @@ handleSubmit=(event)=>{
 	render() { 
 		return (  
 			<>
-			
-		  <div class="container">
-		  <div class="col-xs-12">
+		  <div className="container">
+		  <div className="col-xs-12">
 			  <form onSubmit={this.handleSubmit} class="signup form-group">
-				  <h1 class="form-msg">Sign In</h1>
+				  <h1 className="form-msg">Sign In</h1>
 	  
-				  <div class="form-control">
+				  <div className="form-control">
 					  <label for="Email" class="sr-only">Email</label>
 					  <input type="email" class="input-phchat" name="email" placeholder="Email" />
 				  </div>
-				  <div class="form-control">
-					  <input type="password" class="input-phchat" name="password" placeholder="Password" />
+				  <div className="form-control">
+					  <input type="password" className="input-phchat" name="password" placeholder="Password" />
 				  </div>
-				  <button type="submit" name="signin" class="btn btn-phchat btn-primary" >Sign In</button>
+				  <button type="submit" name="signin" className="btn btn-phchat btn-primary" >Sign In</button>
 			  </form>
-	  
-			  <div class="already-have-account">
-			 
-			  </div>
 		  </div>
 	  </div>
 
