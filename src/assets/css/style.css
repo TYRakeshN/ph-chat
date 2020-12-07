@@ -76,9 +76,12 @@ body {
 	top: 0;
 	opacity: 0;
 }
-
+.style1{
+	color:white;
+}
 .style2{
 margin-right: 40px;
+color:white;
 }
 /* Conversation Page */
 .conversations {
@@ -117,12 +120,18 @@ margin-right: 40px;
 
 .conversations .col-md-4 ul a .user-who-wrote-you {
 	padding: 10px;
+	
 }
 
-.conversations .col-md-4 ul a:not(:first-child) .user-who-wrote-you {
+.conversations .col-md-4 ul a:not(:first-child)  {
 	border-top: 1px solid #c3c3c3;
 }
+.user-who-wrote-you{
+	border:none;
+	padding: 25px;
+	margin: 10px;
 
+}
 .conversations .col-md-4 ul .user-who-wrote-you:hover,
 .active {
 	background-color: #292b2c;
@@ -184,7 +193,7 @@ margin-right: 40px;
 	border: none;
 	background-color: transparent;
 	border: 1px solid #c3c3c3;
-	color: #000;
+	color:#000;
 }
 
 .conversations .messages .messages-show .bubble-message-me {
