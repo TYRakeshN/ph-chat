@@ -3,7 +3,6 @@ import Registration from './components/Registration';
 import Login from './components/Login';
 import {Link, Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
-import Conversation from './components/Conversation';
 import Messages from './components/Messages';
 function App() {
   return (

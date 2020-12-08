@@ -7,7 +7,7 @@ export default function Registration() {
   var [eMail, setEmail] = useState("");
   var [userPassword, setPassword] = useState("");
   var [userName, setUserName] = useState("");
-  var [error,setError]=useState("");
+  var [error,setError]=useState(true);
   const history = useHistory(); 
 
   var handleSubmit = e=>{
@@ -22,8 +22,13 @@ export default function Registration() {
 			  ).then((response) => {
 	setError(response.data.error);
 	console.log(response);
-	console.log(response.data.error);
-	history.push("/login")
+  console.log(response.data.error);
+  setInterval(2000);
+  if(error){
+  history.push("/login")
+  }else{
+    alert("Registration failed!! try agin after sometime")
+  }
   });
 
   }
@@ -70,6 +75,8 @@ export default function Registration() {
               className="input-phchat"
               name="password"
               placeholder="Password"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
 			  onChange={(e) => {
                 setPassword(e.target.value);
               }}

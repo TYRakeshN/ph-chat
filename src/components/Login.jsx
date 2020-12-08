@@ -7,7 +7,7 @@ export default function Login() {
 	var [eMail, setEmail] = useState("");
 	var [userPassword, setPassword] = useState("");
 
-	var [error,setError]=useState("");
+	var [error,setError]=useState(true);
 	var [errorMessage,setErrorMessage]=useState("");
 	const [token,setToken]=useState("");
 	const history = useHistory(); 
@@ -29,7 +29,13 @@ export default function Login() {
 		console.log(response.data);
 		console.log(errorMessage);
 		//console.log(response.data.user.name);
+		setInterval(2000);
+		if(error){
 		history.push({pathname:"/dashboard",state:{ data: response.data.token }})
+		}
+		else{
+			alert("invalid credentials");
+		}
 	  });
 	  }
 	return (

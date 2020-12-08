@@ -4,7 +4,7 @@ import "../assets/css/style.css";
 
 import Axios from "axios";
 import {  decodeToken } from "react-jwt";
-import { useHistory } from 'react-router-dom';
+import Messages from "./Messages";
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -16,7 +16,8 @@ export default class Search extends React.Component {
       messages:[],
       myMessage:'',
       senderId:null,
-      recevierId:null
+      recevierId:null,
+      showComponent:false
      }
   }
   
@@ -31,17 +32,21 @@ export default class Search extends React.Component {
     }).catch(console.log);
   }
   beginChat=(rId,e)=>{
-    this.props.history.push("/messages");
+    //this.props.history.push("/messages");
+    this.setState({showComponent:true});
  this.setState({recevierId:rId});
  const myDecodedToken = decodeToken(this.state.token);
- setInterval(2000);
+ 
  const tokenID=myDecodedToken.id;
- this.setState({senderId:tokenID})
+ this.setState({senderId:tokenID});
+  setInterval(2000);
   console.log("R->"+this.state.recevierId);
   console.log("S->"+this.state.senderId);
+  setInterval(2000);
+ 
   }
 
-  handleSubmit=(e)=>{
+ /* handleSubmit=(e)=>{
     this.setState({myMessage:e.target.value});
     Axios.post('https://ty-chat-app.herokuapp.com/messages',{
 		  sender: this.state.senderId,
@@ -52,7 +57,7 @@ export default class Search extends React.Component {
       console.log(response)
       
     }).catch(console.log);
-  }
+  }*/
   render() { 
     
     return ( <div className="container conversations">
@@ -68,7 +73,10 @@ export default class Search extends React.Component {
         {/* INTERACTED USERS*/}
         </ul>
       </section>
-     
+      {this.state.showComponent ?
+           <Messages   sender={this.state.senderId} receiver={this.state.recevierId} token={this.state.token}/> :
+           null
+        }
     </div>
   </div> );
   }
