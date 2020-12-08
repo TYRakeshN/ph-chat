@@ -167,9 +167,7 @@ color:white;
 	color: #fff;
 	margin-top: 50px;
 }
-.input-style{
-	display:none
-}
+
 .conversations .messages {
 	position: relative;
 	height: 100vh;

@@ -6,13 +6,24 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            token:this.props.location.state.data
+            token: ''
          }
+    }
+
+    componentDidMount() {
+       this.setState({
+           token: localStorage.getItem('token')
+        }, () => {
+            console.log('token is', this.state.token);
+        });        
     }
    
     render() { 
         
-        return (  <Search token={this.state.token} /> );
+
+        return (  
+        <Search token={this.state.token} />
+         );
     }
 }
  

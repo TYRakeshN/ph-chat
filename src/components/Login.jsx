@@ -31,8 +31,10 @@ export default function Login() {
 		//console.log(response.data.user.name);
 		setInterval(2000);
 		if(error){
-		history.push({pathname:"/dashboard",state:{ data: response.data.token }})
+		history.push({pathname:"/dashboard"})
+		localStorage.setItem('token', response.data.token);
 		}
+		
 		else{
 			alert("invalid credentials");
 		}
