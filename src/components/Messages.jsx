@@ -69,13 +69,12 @@ class Messages extends Component {
      <form>
      <input
               type="text"
-              className="input-phchat "
-              id="js-messageBody"
+              className="input-phchat"
               name="message"
               placeholder="Write your message"
              onChange={this.handleChange}
             />
-            <input type="button" className="input-style" onClick={this.handleSubmit} name="SEND" />
+            <input type="button" onClick={this.handleSubmit} value="SEND" />
      </form>
             
             
