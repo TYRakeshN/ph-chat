@@ -16,61 +16,54 @@ class Messages extends Component {
             error: true
          }
     }
-    // handleChange=(e)=>{
-    //     Axios.post('https://ty-chat-app.herokuapp.com/messages',{headers: { 'Authorization': `Bearer ${this.state.token}` }})
-    //     .then((response) => {
-    //         console.log(response);
-    //         this.setState({error: response.data.error});
-    //     });
-        
-    //     Axios.get('https://ty-chat-app.herokuapp.com/messages?sender=senderID&receiver=receiverID', {headers: { 'Authorization': `Bearer ${this.state.token}` }})
-    // .then((response) => {
-    //   console.log(response);
-    //   const data = response.data.messages;
-    //   this.setState({persons: data});
-    //   console.log(this.state.persons);
-    // } )
     
-    //     this.setState({ senderMessage:e.target.value});
-    //     this.setState({showMessages:true})
-    //     console.log(this.state.senderMessage);
-    // }
+    handleChange=(e)=>{
+        //this.setState({showMessages:false})
+        this.setState({senderMessage:e.target.value});
+    }
    
     handleSubmit = (e) => {
-        Axios.post('https://ty-chat-app.herokuapp.com/messages',{headers: { 'Authorization': `Bearer ${this.state.token}` }})
+        Axios.post('https://ty-chat-app.herokuapp.com/messages',{
+            sender:this.state.senderId,
+            receiver:this.state.recevierId,
+            message:this.state.senderMessage
+        },{headers: { 'Authorization': `Bearer ${this.state.token}` }})
         .then((response) => {
             console.log(response);
-            this.setState({error: response.data.error});
+            Axios.get(
+                `https://ty-chat-app.herokuapp.com/messages?sender=${this.state.senderId}&receiver=${this.state.recevierId}`, 
+                {headers: { 'Authorization': `Bearer ${this.state.token}` }}
+                ).then((response)=>{
+                  //  this.setState({showMessages:true});
+                    console.log(response);
+                    console.log(response.data.messages.messages);
+                    this.setState({oldMessages:response.data.messages});
+                    console.log(this.state.oldMessages);
+                });
         });
         
-        Axios.get('https://ty-chat-app.herokuapp.com/messages?sender=senderID&receiver=receiverID', {headers: { 'Authorization': `Bearer ${this.state.token}` }})
-    .then((response) => {
-      console.log(response);
-      const data = response.data.messages;
-      this.setState({persons: data});
-      console.log(this.state.persons);
-    } )
-    
-        this.setState({ senderMessage:e.target.value});
-        this.setState({showMessages:true})
-        console.log(this.state.senderMessage);
+  
     }
-    
+   
     render() { 
+        const listItems = this.state.oldMessages.map((m) =>  
+        
+        <div className="bubble-message bubble-message-me">
+        <p>{m.message}</p>  
+        </div>
+      ); 
         return ( 
             <>
          <section className="col-sm-12 col-md-8 clearfix messages">
         <div className="messages-show" id="js-messagesContainer">
-        {this.state.showMessages && this.state.senderMessage
-         ? (
-              <div className="bubble-message bubble-message-me">
-                  <p>{this.state.oldMessages}</p>
-                  </div>
-          ) : null}
-       {this.state.showMessages && this.state.recevierMessage
-         ? (
-              <div className="bubble-message bubble-message-you"><p>{this.state.recevierMessage}</p></div>
-          ) : null}
+        
+           
+                   {listItems}
+                
+      
+       
+             {/* <div className="bubble-message bubble-message-you"></div>*/}
+          
         </div>
         <div className="write-your-message">
      <form>
@@ -80,9 +73,9 @@ class Messages extends Component {
               id="js-messageBody"
               name="message"
               placeholder="Write your message"
-             
+             onChange={this.handleChange}
             />
-            <input type="button" className="input-style" onClick={this.handleSubmit} name="submit" />
+            <input type="button" className="input-style" onClick={this.handleSubmit} name="SEND" />
      </form>
             
             

@@ -90,7 +90,9 @@ export default class Search extends React.Component {
            <Messages   
            sender={this.state.senderId} receiver={this.state.recevierId}
             token={this.state.token}
-            messages={this.state.messages}/> :
+            messages={this.state.messages}
+            
+            /> :
            null
         }
     </div>
