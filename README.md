@@ -11,7 +11,7 @@ Minimal real-time chat system built with pure Reactjs,NodeJS & Express.
 <img src="https://i.postimg.cc/vTq9Yy6Q/img1.png" />
 
 ## All available  users 
-<img src="https://i.postimg.cc/vTq9Yy6Q/img1.png" />
+<img src="https://i.postimg.cc/pd2mTBg0/img4.png" />
 
 ## message window
 <img src="https://i.postimg.cc/c1988srW/Img2.png" />
