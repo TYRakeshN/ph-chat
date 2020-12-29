@@ -35,6 +35,7 @@ export default function Login() {
 		if(!error){
 		history.push({pathname:"/dashboard"})
 		localStorage.setItem('token', response.data.token);
+		localStorage.setItem('loginValue',"false");
 		}
 		
 		else{

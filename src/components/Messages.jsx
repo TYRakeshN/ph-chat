@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import "../assets/css/style.css";
+import NavLinks from "./NavLinks";
 
 class Messages extends Component {
   constructor(props) {
@@ -67,6 +68,7 @@ class Messages extends Component {
     });
     return (
       <>
+     
         <section className="col-sm-12 col-md-8 clearfix messages">
           <div className="messages-show" id="js-messagesContainer">
             {listItems}

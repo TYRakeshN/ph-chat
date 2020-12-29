@@ -4,7 +4,9 @@ import Login from './components/Login';
 import {Link, Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import Messages from './components/Messages';
+import NavLinks from './components/NavLinks';
 function App() {
+  localStorage.setItem('loginValue',"true");
   return (
     
      <Router>
@@ -16,14 +18,16 @@ function App() {
           <Link className="navbar-brand" to={"/sign-in"}>PhChat</Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
+           
+          <ul className="navbar-nav ml-auto">
+           <li className="nav-item">
                 <Link className="nav-link  navbar-brand" to={"/login"}>Login</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link  navbar-brand" to={"/registration"}>Registration</Link>
               </li>
-            </ul>
+              </ul>
+         
           </div>
         </div>
       </nav>
