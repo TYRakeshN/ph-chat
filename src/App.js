@@ -5,6 +5,7 @@ import {Link, Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import Messages from './components/Messages';
 import NavLinks from './components/NavLinks';
+import mainLogo from'./assets/avatars/profile-default.png';
 function App() {
   localStorage.setItem('loginValue',"true");
   return (
@@ -15,7 +16,9 @@ function App() {
      
         <div className="container">
          
-          <Link className="navbar-brand" to={"/sign-in"}>PhChat</Link>
+          <Link className="navbar-brand" to={"/sign-in"}>
+          <img src={mainLogo} alt="Profile Pic" class="rounded-img header-img p-2" />
+          PhChat</Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             
            

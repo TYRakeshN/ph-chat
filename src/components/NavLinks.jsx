@@ -3,6 +3,7 @@ import {Link } from 'react-router-dom';
 import '../assets/css/style.css';
 const NavLinks = () => {
     const [isPreview, setIsPreview] = localStorage.getItem('loginValue');
+    
     if (isPreview) {
         return (
         <div>

@@ -135,14 +135,16 @@ color:white;
 	border-top: 1px solid #c3c3c3;
 }
 .user-who-wrote-you{
-	border:none;
+	border: none;
 	padding: 25px;
 	margin: 10px;
+	width: 80%;
 
 }
 .conversations .col-md-4 ul .user-who-wrote-you:hover,
 .active {
-	background-color: #292b2c;
+	
+	width: 80%;
 	color: #fff;
 }
 
@@ -154,6 +156,7 @@ color:white;
 
 .conversations .col-md-4 ul .user-who-wrote-you .messager-name {
 	margin-left: 10px;
+	
 	display: inline-block;
 }
 

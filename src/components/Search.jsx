@@ -4,7 +4,7 @@ import "../assets/css/style.css";
 import Axios from "axios";
 import {  decodeToken } from "react-jwt";
 import Messages from "./Messages";
-
+import mainLogo from'../assets/avatars/profile-default.png';
 export default class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -84,7 +84,8 @@ export default class Search extends React.Component {
          <button className="btn btn-outline-secondary btn-block" onClick={() => window.location.reload(false)}>Refresh</button>
          <hr></hr>
         { this.state.persons.map(person => <li  key={person.id}>
-          <button value={person.id} onClick={(e)=>this.beginChat(person.id)} className="user-who-wrote-you p2">{person.name}</button> </li>)}  
+          <img src={mainLogo} alt="Profile Pic" class="rounded-img header-img p-2" />
+          <button value={person.id} onClick={(e)=>this.beginChat(person.id)} className=" user-who-wrote-you btn btn-outline-secondary p2">{person.name}</button> </li>)}  
         </ul>
         <div className="search-user">
         </div>
