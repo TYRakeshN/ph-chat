@@ -2,15 +2,19 @@
 
 Minimal real-time chat system built with pure Reactjs,NodeJS & Express.
 
-<img src="https://image.ibb.co/dferv7/preview.png" />
+
 
 ## Get started
+<img src="https://i.postimg.cc/zfFyDN99/img3.png" />
 
 ## Dashboard
+<img src="https://i.postimg.cc/vTq9Yy6Q/img1.png" />
 
 ## All available  users 
+<img src="https://i.postimg.cc/vTq9Yy6Q/img1.png" />
 
 ## message window
+<img src="https://i.postimg.cc/c1988srW/Img2.png" />
 
 To make things easier, you'll find a _config.sql_ file in this repository, just run it and you're ready to go!
 ## Tecnologies
