@@ -14,8 +14,7 @@ Minimal real-time chat system built with pure Reactjs,NodeJS & Express.
 
 To make things easier, you'll find a _config.sql_ file in this repository, just run it and you're ready to go!
 ## Tecnologies
-* [ReactJS]
-* [Node]
+* [ReactJS](https://reactjs.org/)
 * [jQuery](https://github.com/jquery)
 * [Bootstrap](https://getbootstrap.com/)
 
