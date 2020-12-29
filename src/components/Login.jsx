@@ -11,7 +11,7 @@ export default function Login() {
 	var [errorMessage,setErrorMessage]=useState("");
 	const [token,setToken]=useState("");
 	const history = useHistory(); 
-
+	//const [res,setRes]=useState();
 	
 	  var handleSubmit = e=>{
 		e.preventDefault();
@@ -25,18 +25,22 @@ export default function Login() {
 		setError(response.data.error);
 		setErrorMessage(response.data.message);
 		setToken(response.data.token);
+		//setRes(response.data);
+		//console.log("res"+res);
 		console.log(token);
 		console.log(response.data);
 		console.log(errorMessage);
 		//console.log(response.data.user.name);
 		setInterval(2000);
-		if(error){
+		if(!error){
 		history.push({pathname:"/dashboard"})
 		localStorage.setItem('token', response.data.token);
 		}
 		
 		else{
-			alert("invalid credentials");
+		//	console.log("res->"+res);
+		//	console.log("res message->"+res.message);
+			alert("Try Again!!");
 		}
 	  });
 	  }

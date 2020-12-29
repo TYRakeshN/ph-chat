@@ -8,6 +8,7 @@ export default function Registration() {
   var [userPassword, setPassword] = useState("");
   var [userName, setUserName] = useState("");
   var [error,setError]=useState(true);
+  //const [res,setRes]=useState();
   const history = useHistory(); 
 
   var handleSubmit = e=>{
@@ -20,14 +21,17 @@ export default function Registration() {
 	  password: userPassword
 	}
 			  ).then((response) => {
+         // setRes(response.data);
 	setError(response.data.error);
 	console.log(response);
   console.log(response.data.error);
   setInterval(2000);
-  if(error){
+  if(!error){
   history.push("/login")
   }else{
-    alert("Registration failed!! try agin after sometime")
+    //console.log("res->"+res);
+   // console.log("res message->"+res.message);
+    alert("Try Again!!");
   }
   });
 

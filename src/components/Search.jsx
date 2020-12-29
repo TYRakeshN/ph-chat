@@ -13,7 +13,6 @@ export default class Search extends React.Component {
       persons:[],
       token:localStorage.getItem('token'),
       messages:[],
-      oldMessage:[],
       myMessage:'',
       senderId:null,
       recevierId:null,
@@ -36,6 +35,8 @@ export default class Search extends React.Component {
   }
   
   beginChat=(rId,e)=>{
+   
+   this.setState({showComponent:false});
     const myDecodedToken = decodeToken(this.state.token);
     const tokenID=myDecodedToken.id;
     this.setState({
@@ -43,8 +44,8 @@ export default class Search extends React.Component {
       showComponent:true,
       recevierId:rId
       }, () => {
-      console.log("R->"+this.state.recevierId);
-      console.log("S->"+this.state.senderId);
+      console.log("Reciver->"+this.state.recevierId);
+      console.log("Sender->"+this.state.senderId);
         Axios.get(
           `https://ty-chat-app.herokuapp.com/messages?sender=${this.state.senderId}&receiver=${this.state.recevierId}`, 
           {headers: { 'Authorization': `Bearer ${this.state.token}` }}
@@ -75,8 +76,13 @@ export default class Search extends React.Component {
     return ( <div className="container conversations">
     <div className="row">
       <section className="col-md-4 conversations-section">
-        <ul className="user-list">
-         AVAILABLE USERS
+      <hr></hr>
+        <ul className="user-list ">
+         
+        <p className="users-block">  <img className="users-image" src="https://image.flaticon.com/icons/png/512/32/32441.png" alt=""/> AVAILABLE USERS</p>
+        <hr></hr>
+         <button className="btn btn-outline-secondary btn-block" onClick={() => window.location.reload(false)}>Refresh</button>
+         <hr></hr>
         { this.state.persons.map(person => <li  key={person.id}>
           <button value={person.id} onClick={(e)=>this.beginChat(person.id)} className="user-who-wrote-you p2">{person.name}</button> </li>)}  
         </ul>
@@ -88,7 +94,7 @@ export default class Search extends React.Component {
       </section>
       {this.state.showComponent ?
            <Messages   
-           sender={this.state.senderId} receiver={this.state.recevierId}
+            sender={this.state.senderId} receiver={this.state.recevierId}
             token={this.state.token}
             messages={this.state.messages}
             
