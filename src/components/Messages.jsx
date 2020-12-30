@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import "../assets/css/style.css";
-import NavLinks from "./NavLinks";
+
 
 class Messages extends Component {
   constructor(props) {
@@ -15,6 +15,7 @@ class Messages extends Component {
       oldMessages: this.props.messages,
       showMessages: false,
       error: true,
+      receiverName:this.props.messageRecieverName
     };
   }
 
@@ -50,10 +51,10 @@ class Messages extends Component {
 
   render() {
     const listItems = this.state.oldMessages.map((m) => {
-        console.log("Sender->"+m.sender+"  CurrentUserSenderId->"+this.state.senderId);
-        console.log("Reciever->"+m.receiver+"  CurrentUserRecieverID->"+this.state.recevierId);
-        console.log(typeof(m.sender));
-        console.log(typeof(this.state.senderId));
+       // console.log("Sender->"+m.sender+"  CurrentUserSenderId->"+this.state.senderId);
+      //  console.log("Reciever->"+m.receiver+"  CurrentUserRecieverID->"+this.state.recevierId);
+        //console.log(typeof(m.sender));
+      //  console.log(typeof(this.state.senderId));
       if (parseInt(m.sender) === this.state.senderId) {
       return  (<div className="bubble-message bubble-message-me">
           <p key="m.sender">{m.message}</p>
@@ -69,12 +70,15 @@ class Messages extends Component {
     return (
       <>
      
-        <section className="col-sm-12 col-md-8 clearfix messages">
+        <section className="col-sm-10 col-md-8 clearfix messages">
+        <p className="message-reciver-style">{this.state.receiverName}</p>
+        <hr></hr>
           <div className="messages-show" id="js-messagesContainer">
             {listItems}
             {/* */}
           </div>
           <div className="write-your-message">
+         
             <form>
               <input
                 type="text"

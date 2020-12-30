@@ -7,8 +7,7 @@ export default function Registration() {
   var [eMail, setEmail] = useState("");
   var [userPassword, setPassword] = useState("");
   var [userName, setUserName] = useState("");
-  var [error,setError]=useState(true);
-  //const [res,setRes]=useState();
+  var [error,setError]=useState();
   const history = useHistory(); 
 
   var handleSubmit = e=>{
@@ -21,7 +20,6 @@ export default function Registration() {
 	  password: userPassword
 	}
 			  ).then((response) => {
-         // setRes(response.data);
 	setError(response.data.error);
 	console.log(response);
   console.log(response.data.error);
@@ -29,8 +27,6 @@ export default function Registration() {
   if(!error){
   history.push("/login")
   }else{
-    //console.log("res->"+res);
-   // console.log("res message->"+res.message);
     alert("Try Again!!");
   }
   });
@@ -42,7 +38,6 @@ export default function Registration() {
       <div className="col-xs-12">
         <form onSubmit={handleSubmit} className="signup form-group">
           <h1 className="form-msg">Sign Up</h1>
-
           <div className="form-control">
             <label htmlFor="username" className="sr-only">
               Username

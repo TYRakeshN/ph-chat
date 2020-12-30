@@ -16,7 +16,9 @@ export default class Search extends React.Component {
       myMessage:'',
       senderId:null,
       recevierId:null,
-      showComponent:false
+      showComponent:false,
+      user:'',
+      receiverName:''
      }
   }
   
@@ -28,21 +30,28 @@ export default class Search extends React.Component {
     .then((response)=>{
       console.log(response)
       const data=response.data.users;
+      const myDecodedToken = decodeToken(this.state.token);
+      const userName=myDecodedToken.name;
+     // console.log("decodedtoken"+decodeToken);
+      this.setState({user:userName});
       this.setState({persons:data}, () => {
         console.log(this.state.persons);
       });
     }).catch(console.log);
   }
   
-  beginChat=(rId,e)=>{
+  beginChat=(rId,rName,e)=>{
    
    this.setState({showComponent:false});
     const myDecodedToken = decodeToken(this.state.token);
+    console.log("decodedtoken"+decodeToken);
     const tokenID=myDecodedToken.id;
+   
     this.setState({
       senderId:tokenID, 
       showComponent:true,
-      recevierId:rId
+      recevierId:rId,
+      receiverName:rName
       }, () => {
       console.log("Reciver->"+this.state.recevierId);
       console.log("Sender->"+this.state.senderId);
@@ -59,46 +68,44 @@ export default class Search extends React.Component {
     });
   }
 
- /* handleSubmit=(e)=>{
-    this.setState({myMessage:e.target.value});
-    Axios.post('https://ty-chat-app.herokuapp.com/messages',{
-		  sender: this.state.senderId,
-      receiver: this.state.recevierId,
-      message:this.state.myMessage
-		},{headers: { 'Authorization': `Bearer ${this.state.token}` }})
-    .then((response)=>{
-      console.log(response)
-      
-    }).catch(console.log);
-  }*/
   render() { 
+    const users = this.state.persons.map((p) => {
+    //  console.log("p"+typeof(p.name)+" "+p.name);
+     // console.log("user"+typeof(this.state.user)+" "+this.state.user);
+     if ( this.state.user === p.name) {
+     return  null;
+     }else {
+       return(<div>
+        <li  key={p.id}>
+        <img src={mainLogo} alt="Profile Pic" class="rounded-img header-img p-2" />
+        <button value={p.id} onClick={(e)=>this.beginChat(p.id,p.name)} 
+        className=" user-who-wrote-you btn btn-outline-secondary p2">{p.name}</button> </li>
+        </div>)
+     }
+     
     
+   });
     return ( <div className="container conversations">
     <div className="row">
       <section className="col-md-4 conversations-section">
       <hr></hr>
         <ul className="user-list ">
          
-        <p className="users-block">  <img className="users-image" src="https://image.flaticon.com/icons/png/512/32/32441.png" alt=""/> AVAILABLE USERS</p>
+        <p className="users-block">  <img className="users-image" src="https://image.flaticon.com/icons/png/512/32/32441.png" alt=""/> AVAILABLE USERS | {this.state.user} </p>
         <hr></hr>
          <button className="btn btn-outline-secondary btn-block" onClick={() => window.location.reload(false)}>Refresh</button>
          <hr></hr>
-        { this.state.persons.map(person => <li  key={person.id}>
-          <img src={mainLogo} alt="Profile Pic" class="rounded-img header-img p-2" />
-          <button value={person.id} onClick={(e)=>this.beginChat(person.id)} className=" user-who-wrote-you btn btn-outline-secondary p2">{person.name}</button> </li>)}  
+        { users}  
         </ul>
         <div className="search-user">
         </div>
-        <ul className="user-list">
-        {/* INTERACTED USERS*/}
-        </ul>
       </section>
       {this.state.showComponent ?
            <Messages   
             sender={this.state.senderId} receiver={this.state.recevierId}
             token={this.state.token}
             messages={this.state.messages}
-            
+            messageRecieverName={this.state.receiverName}
             /> :
            null
         }

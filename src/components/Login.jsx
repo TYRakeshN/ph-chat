@@ -35,13 +35,13 @@ export default function Login() {
 		if(!error){
 		history.push({pathname:"/dashboard"})
 		localStorage.setItem('token', response.data.token);
+		console.log(localStorage.getItem('loginvalue'));
 		localStorage.setItem('loginValue',"false");
-		console.log()
+		
 		}
 		
 		else{
-		//	console.log("res->"+res);
-		//	console.log("res message->"+res.message);
+		
 			alert("Try Again!!");
 		}
 	  });

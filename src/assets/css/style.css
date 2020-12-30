@@ -3,7 +3,9 @@ body {
 	/*overflow: hidden;*/
 	background-color: #f3f3f3 !important;
 }
-
+.back-style{
+	background-color: black;
+}
 .form-control {
 	border: none;
 }
@@ -70,11 +72,13 @@ input[type=button] {
 .navbar-brand:hover,
 .navbar-brand:visited,
 .navbar-brand:active {
-	color: #000 !important;
+	color:white !important;
+	
 }
 
 .navbar .account-box {
 	position: relative;
+	
 }
 
 .navbar .account-box .profile-pic-upload {
@@ -185,14 +189,14 @@ color:white;
 }
 
 .conversations .messages .messages-show {
-	height: 77%;
+	height: 57%;
 	overflow-y: auto;
 }
 
 .conversations .messages .messages-show .bubble-message {
 	background-color: #292b2c;
-	margin: 10px;
-	width: 60%;
+	margin: 5px;
+	width: 50%;
 	padding: 10px;
 	color: #fff;
 	border-radius: 10px;
@@ -251,6 +255,7 @@ input[type=button]{
 .users-image{
 	width: 50px;
 	border-radius: 40px;
+	border-color: white;
 }
 @media (max-width: 992px) {
 	.header-top .form-inline {
@@ -262,4 +267,9 @@ input[type=button]{
 		align-items: center;
 		justify-content: center;
 	}
+}
+.message-reciver-style{
+	font-weight: bolder;
+	text-align: center;
+	
 }
