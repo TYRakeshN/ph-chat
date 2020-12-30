@@ -49,7 +49,17 @@ function App() {
               </ul>
             ) : (
               <ul className="navbar-nav ml-auto">
-              
+              <li className="nav-item">
+              <Link className="nav-link  navbar-brand" to={"/login"}>
+                Login
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link  navbar-brand" to={"/registration"}>
+                Registration
+              </Link>
+            </li>
+           
             <li className="nav-item">
               <Link className="nav-link  navbar-brand" to={"/login"}>
                 Logout

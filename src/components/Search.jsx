@@ -41,37 +41,22 @@ export default class Search extends React.Component {
   }
   
   beginChat=(rId,rName,e)=>{
-   
-   this.setState({showComponent:false});
+    console.log(rName);
     const myDecodedToken = decodeToken(this.state.token);
-    console.log("decodedtoken"+decodeToken);
+   // console.log("decodedtoken"+decodeToken);
     const tokenID=myDecodedToken.id;
-   
+    console.log("before"+this.state.receiverName);
     this.setState({
       senderId:tokenID, 
       showComponent:true,
       recevierId:rId,
       receiverName:rName
-      }, () => {
-      console.log("Reciver->"+this.state.recevierId);
-      console.log("Sender->"+this.state.senderId);
-        Axios.get(
-          `https://ty-chat-app.herokuapp.com/messages?sender=${this.state.senderId}&receiver=${this.state.recevierId}`, 
-          {headers: { 'Authorization': `Bearer ${this.state.token}` }}
-          ).then((response) => {
-          console.log(response);
-          const data = response.data.messages;
-          this.setState({messages: data}, () => {
-            console.log(this.state.messages);
-          });
-        });
     });
+    console.log("After"+this.state.receiverName);
   }
 
   render() { 
     const users = this.state.persons.map((p) => {
-    //  console.log("p"+typeof(p.name)+" "+p.name);
-     // console.log("user"+typeof(this.state.user)+" "+this.state.user);
      if ( this.state.user === p.name) {
      return  null;
      }else {
@@ -102,10 +87,11 @@ export default class Search extends React.Component {
       </section>
       {this.state.showComponent ?
            <Messages   
-            sender={this.state.senderId} receiver={this.state.recevierId}
+            sender={this.state.senderId} 
+            receiver={this.state.recevierId}
             token={this.state.token}
-            messages={this.state.messages}
             messageRecieverName={this.state.receiverName}
+            onNameChange={this.onChange}
             /> :
            null
         }

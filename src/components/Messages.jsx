@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import "../assets/css/style.css";
-
+import equal from 'fast-deep-equal'
 
 class Messages extends Component {
   constructor(props) {
@@ -11,20 +11,45 @@ class Messages extends Component {
       recevierId: this.props.receiver,
       token: localStorage.getItem("token"),
       senderMessage: "",
-      recevierMessage: "",
-      oldMessages: this.props.messages,
+      oldMessages: [],
       showMessages: false,
-      error: true,
       receiverName:this.props.messageRecieverName
     };
   }
 
   handleChange = (e) => {
-    //this.setState({showMessages:false})
-    this.setState({ senderMessage: e.target.value });
+      this.setState({ senderMessage: e.target.value });
   };
-
+componentDidMount(){
+  
+  Axios.get(
+    `https://ty-chat-app.herokuapp.com/messages?sender=${this.state.senderId}&receiver=${this.state.recevierId}`,
+    { headers: { Authorization: `Bearer ${this.state.token}` } }
+  ).then((response) => {
+    this.setState({ oldMessages: response.data.messages });
+    console.log(this.state.oldMessages);
+    
+  });
+}
+componentWillReceiveProps(newProps) {
+  this.setState({receiverName: newProps.messageRecieverName,recevierId:newProps.receiver});
+}
+componentDidUpdate(prevProps){
+  if(!equal(this.props.receiver,prevProps.receiver)){
+  Axios.get(
+    `https://ty-chat-app.herokuapp.com/messages?sender=${this.state.senderId}&receiver=${this.state.recevierId}`,
+    { headers: { Authorization: `Bearer ${this.state.token}` } }
+  ).then((response) => {
+    this.setState({ oldMessages: response.data.messages });
+    console.log(this.state.oldMessages);
+    
+  });
+}
+}
   handleSubmit = (e) => {
+    if(this.state.senderMessage === ''){
+      alert("message cannot be empty!!")
+   }else{
     Axios.post(
       "https://ty-chat-app.herokuapp.com/messages",
       {
@@ -34,27 +59,20 @@ class Messages extends Component {
       },
       { headers: { Authorization: `Bearer ${this.state.token}` } }
     ).then((response) => {
-      console.log(response);
+     
       Axios.get(
         `https://ty-chat-app.herokuapp.com/messages?sender=${this.state.senderId}&receiver=${this.state.recevierId}`,
         { headers: { Authorization: `Bearer ${this.state.token}` } }
       ).then((response) => {
-        //  this.setState({showMessages:true});
-        console.log(response);
-        console.log(response.data.messages.messages);
         this.setState({ oldMessages: response.data.messages });
-        console.log(this.state.oldMessages);
         this.setState({ senderMessage: "" });
       });
     });
+  }
   };
 
   render() {
     const listItems = this.state.oldMessages.map((m) => {
-       // console.log("Sender->"+m.sender+"  CurrentUserSenderId->"+this.state.senderId);
-      //  console.log("Reciever->"+m.receiver+"  CurrentUserRecieverID->"+this.state.recevierId);
-        //console.log(typeof(m.sender));
-      //  console.log(typeof(this.state.senderId));
       if (parseInt(m.sender) === this.state.senderId) {
       return  (<div className="bubble-message bubble-message-me">
           <p key="m.sender">{m.message}</p>
@@ -64,29 +82,26 @@ class Messages extends Component {
             <p key="m.receiver">{m.message}</p>
         </div>)
       }
-      
-     
     });
     return (
       <>
-     
         <section className="col-sm-10 col-md-8 clearfix messages">
         <p className="message-reciver-style">{this.state.receiverName}</p>
         <hr></hr>
           <div className="messages-show" id="js-messagesContainer">
             {listItems}
-            {/* */}
           </div>
           <div className="write-your-message">
-         
             <form>
               <input
                 type="text"
                 className="input-phchat"
                 id="ph-chat-input-field"
                 name="message"
-                placeholder="Write your message"
+                value={this.state.senderMessage}
+                placeholder="Write your message here"
                 onChange={this.handleChange}
+                required
               />
               <input type="button" onClick={this.handleSubmit} value="SEND" />
             </form>
@@ -96,5 +111,4 @@ class Messages extends Component {
     );
   }
 }
-
 export default Messages;
