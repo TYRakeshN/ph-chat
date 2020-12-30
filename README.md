@@ -2,7 +2,24 @@
 
 Minimal real-time chat system built with pure Reactjs[FE],NodeJS & Express.
 
-## Get started
+## Installation
+
+Clone the repository and use the following command to install the dependencies.
+
+```bash
+npm install
+```
+
+## Usage
+
+```bash
+npm start
+```
+## live demo link
+
+[PhChat](https://ph-chat-4c12e5.netlify.app/)
+
+## Get started 
 <img src="https://i.postimg.cc/zfFyDN99/img3.png" />
 
 ## Dashboard
