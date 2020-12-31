@@ -41,18 +41,14 @@ export default class Search extends React.Component {
   }
   
   beginChat=(rId,rName,e)=>{
-    console.log(rName);
     const myDecodedToken = decodeToken(this.state.token);
-   // console.log("decodedtoken"+decodeToken);
     const tokenID=myDecodedToken.id;
-    console.log("before"+this.state.receiverName);
     this.setState({
       senderId:tokenID, 
       showComponent:true,
       recevierId:rId,
       receiverName:rName
     });
-    console.log("After"+this.state.receiverName);
   }
 
   render() { 
@@ -64,7 +60,7 @@ export default class Search extends React.Component {
         <li  key={p.id}>
         <img src={mainLogo} alt="Profile Pic" class="rounded-img header-img p-2" />
         <button value={p.id} onClick={(e)=>this.beginChat(p.id,p.name)} 
-        className=" user-who-wrote-you btn btn-outline-secondary p2">{p.name}</button> </li>
+        className=" user-who-wrote-you btn btn-outline-secondary p2 user-btn-style" >{p.name}</button> </li>
         </div>)
      }
      
@@ -73,17 +69,19 @@ export default class Search extends React.Component {
     return ( <div className="container conversations">
     <div className="row">
       <section className="col-md-4 conversations-section">
+      <p className="users-block"> User : {this.state.user} </p>
       <hr></hr>
         <ul className="user-list ">
          
-        <p className="users-block">  <img className="users-image" src="https://image.flaticon.com/icons/png/512/32/32441.png" alt=""/> AVAILABLE USERS | {this.state.user} </p>
+        <p className="users-block">  <img className="users-image" src="https://image.flaticon.com/icons/png/512/32/32441.png" alt=""/> AVAILABLE USERS </p>
         <hr></hr>
-         <button className="btn btn-outline-secondary btn-block" onClick={() => window.location.reload(false)}>Refresh</button>
+         <button className="btn btn-outline-secondary btn-block user-btn-style" onClick={() => window.location.reload(false)}>Refresh</button>
          <hr></hr>
         { users}  
         </ul>
         <div className="search-user">
         </div>
+       
       </section>
       {this.state.showComponent ?
            <Messages   
@@ -91,7 +89,7 @@ export default class Search extends React.Component {
             receiver={this.state.recevierId}
             token={this.state.token}
             messageRecieverName={this.state.receiverName}
-            onNameChange={this.onChange}
+         
             /> :
            null
         }

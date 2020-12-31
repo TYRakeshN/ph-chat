@@ -85,17 +85,21 @@ componentDidUpdate(prevProps){
     });
     return (
       <>
+      
         <section className="col-sm-10 col-md-8 clearfix messages">
-        <p className="message-reciver-style">{this.state.receiverName}</p>
+        <p className="message-reciver-style">Recipient Name : {this.state.receiverName}</p>
         <hr></hr>
           <div className="messages-show" id="js-messagesContainer">
             {listItems}
           </div>
           <div className="write-your-message">
             <form>
+            <div class="form-group">
+            <div class="row">
+            <div class="col col-lg-10">
               <input
                 type="text"
-                className="input-phchat"
+                className="form-control "
                 id="ph-chat-input-field"
                 name="message"
                 value={this.state.senderMessage}
@@ -103,8 +107,14 @@ componentDidUpdate(prevProps){
                 onChange={this.handleChange}
                 required
               />
-              <input type="button" onClick={this.handleSubmit} value="SEND" />
-            </form>
+              </div>
+             
+              <div class="col col-sm-2">
+              <input type="button" className="btn btn-outline-dark"onClick={this.handleSubmit} value="SEND" />
+              </div>
+              </div>
+              </div>
+              </form>
           </div>
         </section>
       </>
