@@ -3,20 +3,24 @@ import Axios from "axios";
 import "../assets/css/style.css";
 import equal from 'fast-deep-equal'
 
+const tokenValue = localStorage.getItem('token');
+
 class Messages extends Component {
   constructor(props) {
     super(props);
     this.state = {
       senderId: this.props.sender,
       recevierId: this.props.receiver,
-      token: localStorage.getItem("token"),
+      token:tokenValue ,
       senderMessage: "",
       oldMessages: [],
       showMessages: false,
       receiverName:this.props.messageRecieverName
     };
   }
-
+  formSubmitHandler=(e)=>{
+    e.preventDefault();
+  }
   handleChange = (e) => {
       this.setState({ senderMessage: e.target.value });
   };
@@ -93,10 +97,10 @@ componentDidUpdate(prevProps){
             {listItems}
           </div>
           <div className="write-your-message">
-            <form>
-            <div class="form-group">
-            <div class="row">
-            <div class="col col-lg-10">
+            <form onSubmit={this.formSubmitHandler}>
+            <div className="form-group">
+            <div className="row">
+            <div className="col col-lg-10">
               <input
                 type="text"
                 className="form-control "
@@ -109,7 +113,7 @@ componentDidUpdate(prevProps){
               />
               </div>
              
-              <div class="col col-sm-2">
+              <div className="col col-sm-2">
               <input type="button" className="btn btn-outline-dark"onClick={this.handleSubmit} value="SEND" />
               </div>
               </div>

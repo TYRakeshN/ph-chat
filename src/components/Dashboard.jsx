@@ -1,31 +1,17 @@
-import React from 'react';
-import Search from './Search';
-import '../assets/css/style.css';
+import React from "react";
+import Search from "./Search";
+import "../assets/css/style.css";
+import NavigationBar from "./NavigationBar";
 
 class Dashboard extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-            token: ''
-         }
-    }
-
-    componentDidMount() {
-       this.setState({
-           token: localStorage.getItem('token')
-        }, () => {
-            console.log('token is', this.state.token);
-        });        
-    }
-   
-    render() { 
-        
-
-        return (  
-        <Search token={this.state.token} />
-         );
-    }
+  render() {
+    return (
+      <>
+        <NavigationBar isLog={true} />
+        <Search  />
+      </>
+    );
+  }
 }
- 
-export default Dashboard;
 
+export default Dashboard;

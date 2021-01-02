@@ -2,17 +2,15 @@ import React, {  useState } from "react";
 import { useHistory } from 'react-router-dom';
 import "../assets/css/style.css";
 import axios from "axios";
-
+//import json from 'json5';
 export default function Registration() {
   var [eMail, setEmail] = useState("");
   var [userPassword, setPassword] = useState("");
   var [userName, setUserName] = useState("");
-  var [error,setError]=useState();
   const history = useHistory(); 
-
+  
   var handleSubmit = e=>{
 	e.preventDefault();
-	console.log("register");
 	axios.post('https://ty-chat-app.herokuapp.com/users/register', 
 	{
 	  name:userName,
@@ -20,14 +18,10 @@ export default function Registration() {
 	  password: userPassword
 	}
 			  ).then((response) => {
-	setError(response.data.error);
-	console.log(response);
-  console.log(response.data.error);
-  setInterval(2000);
-  if(!error){
+  if(!response.data.error){
   history.push("/login")
   }else{
-    alert("Try Again!!");
+    alert("Try Again!! "+response.data.message);
   }
   });
 
