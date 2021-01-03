@@ -3,7 +3,6 @@ import Axios from "axios";
 import "../assets/css/style.css";
 import equal from 'fast-deep-equal'
 
-const tokenValue = localStorage.getItem('token');
 
 class Messages extends Component {
   constructor(props) {
@@ -11,7 +10,7 @@ class Messages extends Component {
     this.state = {
       senderId: this.props.sender,
       recevierId: this.props.receiver,
-      token:tokenValue ,
+      token:localStorage.getItem('token') ,
       senderMessage: "",
       oldMessages: [],
       showMessages: false,

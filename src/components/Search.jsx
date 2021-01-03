@@ -1,20 +1,16 @@
 import React from "react";
 import "../assets/css/style.css";
-//import logo from "../assets/avatars/profile-default.png";
 import Axios from "axios";
 import {  decodeToken } from "react-jwt";
 import Messages from "./Messages";
 import mainLogo from'../assets/avatars/profile-default.png';
 
-let token = localStorage.getItem('token');
-const myDecodedToken = decodeToken(token);
-
 export default class Search extends React.Component {
-  
   constructor(props) {
     super(props);
     this.state = { 
       persons:[],
+      token:localStorage.getItem('token'),
       messages:[],
       myMessage:'',
       senderId:null,
@@ -25,13 +21,14 @@ export default class Search extends React.Component {
      }
   }
   
-
-  componentDidMount() {
-   
+  fetchAllUserDb=()=>{
+    console.log("Fetch/Refresh")
+    const token = localStorage.getItem('token');
     Axios.get('https://ty-chat-app.herokuapp.com/users',
     {headers: { 'Authorization': `Bearer ${token}` }})
     .then((response)=>{
       const data=response.data.users;
+      const myDecodedToken = decodeToken(this.state.token);
       const userName=myDecodedToken.name;
       this.setState({user:userName});
       this.setState({persons:data}, () => {
@@ -39,8 +36,13 @@ export default class Search extends React.Component {
       });
     }).catch(console.log);
   }
+
+  componentDidMount() {
+    this.fetchAllUserDb();
+  }
   
   beginChat=(recepientId,recepientName,e)=>{
+    const myDecodedToken = decodeToken(this.state.token);
     const tokenID=myDecodedToken.id;
     this.setState({
       senderId:tokenID, 
@@ -49,20 +51,17 @@ export default class Search extends React.Component {
       receiverName:recepientName
     });
   }
-  handleRefresh=()=>{
-    console.log("refresh called");
-    this.forceUpdate();
-  };
+
   render() { 
-    const users = this.state.persons.map((person) => {
-     if ( this.state.user === person.name) {
+    const users = this.state.persons.map((p) => {
+     if ( this.state.user === p.name) {
      return  null;
      }else {
        return(<div>
-        <li  key={person.id}>
+        <li  key={p.id}>
         <img src={mainLogo} alt="Profile Pic" className="rounded-img header-img p-2" />
-        <button value={person.id} onClick={(e)=>this.beginChat(person.id,person.name)} 
-        className=" user-who-wrote-you btn btn-outline-secondary p2 user-btn-style" >{person.name}</button> </li>
+        <button value={p.id} onClick={(e)=>this.beginChat(p.id,p.name)} 
+        className=" user-who-wrote-you btn btn-outline-secondary p2 user-btn-style">{p.name}</button> </li>
         </div>)
      }
      
@@ -77,7 +76,7 @@ export default class Search extends React.Component {
          
         <p className="users-block">  <img className="users-image" src="https://image.flaticon.com/icons/png/512/32/32441.png" alt=""/> AVAILABLE USERS </p>
         <hr></hr>
-         {/*<button className="btn btn-outline-secondary btn-block user-btn-style" onClick={this.handleRefresh}>Refresh</button> */}
+         <button className="btn btn-outline-secondary btn-block user-btn-style" onClick={() => this.fetchAllUserDb()}>Refresh</button>
          <hr></hr>
         { users}  
         </ul>
@@ -89,7 +88,7 @@ export default class Search extends React.Component {
            <Messages   
             sender={this.state.senderId} 
             receiver={this.state.recevierId}
-            token={token}
+            token={this.state.token}
             messageRecieverName={this.state.receiverName}
          
             /> :
