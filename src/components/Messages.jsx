@@ -24,7 +24,7 @@ class Messages extends Component {
       this.setState({ senderMessage: e.target.value });
   };
 componentDidMount(){
-  
+  setInterval(() =>
   Axios.get(
     `https://ty-chat-app.herokuapp.com/messages?sender=${this.state.senderId}&receiver=${this.state.recevierId}`,
     { headers: { Authorization: `Bearer ${this.state.token}` } }
@@ -32,12 +32,13 @@ componentDidMount(){
     this.setState({ oldMessages: response.data.messages });
     console.log(this.state.oldMessages);
     
-  });
+  }),1000);
 }
 componentWillReceiveProps(newProps) {
   this.setState({receiverName: newProps.messageRecieverName,recevierId:newProps.receiver});
 }
 componentDidUpdate(prevProps){
+  
   if(!equal(this.props.receiver,prevProps.receiver)){
   Axios.get(
     `https://ty-chat-app.herokuapp.com/messages?sender=${this.state.senderId}&receiver=${this.state.recevierId}`,
