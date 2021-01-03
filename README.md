@@ -20,16 +20,21 @@ npm start
 [PhChat](https://ph-chat-4c12e5.netlify.app/)
 
 ## Get started 
-<img src="https://i.postimg.cc/zfFyDN99/img3.png" />
+
+## login
+<img src="https://i.postimg.cc/mDvggJWc/login.png" />
+
+## Registration
+<img src="https://i.postimg.cc/RZp90ycM/Registration.png" />
 
 ## Dashboard
-<img src="https://i.postimg.cc/pd2mTBg0/img4.png" />
+<img src="https://i.postimg.cc/FFSjVQRB/Dashboard1.png" />
 
 ## All available  users 
-<img src="https://i.postimg.cc/pd2mTBg0/img4.png" />
+<img src="https://i.postimg.cc/FFSjVQRB/Dashboard1.png" />
 
 ## message window
-<img src="https://i.postimg.cc/c1988srW/Img2.png" />
+<img src="https://i.postimg.cc/28P7f8tm/Message-Screen.png" />
 
 
 ## Front End  Tecnologies
