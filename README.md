@@ -28,10 +28,10 @@ npm start
 <img src="https://i.postimg.cc/RZp90ycM/Registration.png" />
 
 ## Dashboard
-<img src="https://i.postimg.cc/7P9RD714/Dashboard.pngg" />
+<img src="https://i.postimg.cc/FFSjVQRB/Dashboard1.png" />
 
 ## All available  users 
-<img src="https://i.postimg.cc/7P9RD714/Dashboard.png" />
+<img src="https://i.postimg.cc/FFSjVQRB/Dashboard1.png" />
 
 ## message window
 <img src="https://i.postimg.cc/28P7f8tm/Message-Screen.png" />
